@@ -19,5 +19,5 @@ class InvoiceHelper:
     @staticmethod
     def get_all(api_key):
         for cust in stripe.Customer.list(api_key=api_key):
-            for inv in stripe.Invoice.list(api_key=api_key):
+            for inv in stripe.Invoice.list(api_key=api_key, customer=cust, limit=100):
                 yield [cust, inv]
